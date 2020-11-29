@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :tasks
+  resources :projects do
+    resources :tasks
+  end
+  get "/pages/:page" => "static_pages#show"
 end

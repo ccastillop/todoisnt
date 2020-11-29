@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title
+      | Todoisnt
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+  body
+    header.container.mx-auto.mt-4
+      .flex
+        . = image_tag "logo.svg"
+
+    section.container.mx-auto.mt-4.flex.max-w-lg
+      sidebar.mr-8.w-1/3
+        .flex 
+          = image_tag "inbox.svg"
+          span.ml-1 Inbox
+        
+        .flex.mt-2
+          = image_tag "chevron-r.svg"
+          span.ml-1 Projects
+          
+        .flex.mt-2
+          = image_tag "plus.svg"
+          span.ml-1 Create project
+          
+      section.w-2/3
+        = yield

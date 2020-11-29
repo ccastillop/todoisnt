@@ -1,0 +1,99 @@
+.form {
+  .input,
+  .form-group {
+    @apply mb-6;
+  }
+
+  fieldset {
+    @apply border border-gray-700 p-4 my-6 rounded-md;
+    legend {
+      @apply px-2 font-bold;
+    }
+  }
+
+  .checkbox,
+  .radio {
+    input {
+      @apply inline-block;
+    }
+    label {
+      @apply inline-block mr-1;
+    }
+  }
+
+  label {
+    @apply block pb-2;
+    abbr {
+    }
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="time"],
+  input[type="password"],
+  textarea,
+  .input_like {
+    @apply border-1 border-black py-2 px-3 bg-white min-h-3;
+    &:disabled,
+    &.disabled {
+      @apply bg-gray-100;
+      @apply shadow-none;
+    }
+    &:focus {
+      @apply border-green1 outline-none;
+    }
+  }
+
+  textarea {
+    @apply w-full;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    @apply mr-2;
+  }
+
+  select {
+    @apply bg-white border-1 border-black pl-2 pr-4 py-2 min-h-3 w-full;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 14 7"><g><g><path d="M0 0l7 7 7-7z"/></g></g></svg>')
+      no-repeat;
+    background-size: 10px;
+    background-position: calc(100% - 6px) center;
+    &:disabled {
+      @apply bg-white shadow-none border-gray3 text-gray4;
+    }
+    &:focus {
+      @apply border-green1 outline-none;
+    }
+  }
+
+  .field_with_errors,
+  .has-danger, .error {
+    input,
+    select,
+    textarea {
+      @apply border border-red1;
+    }
+    .error,
+    .form-control-feedback {
+      @apply text-red-100 text-sm italic;
+    }
+  }
+
+  .hint {
+    @apply text-gray-800 text-sm text-right;
+  }
+
+  input.js-input-field[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+}
+

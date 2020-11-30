@@ -149,15 +149,12 @@ p.mb-2 This is pre-formatted:
 pre
   |  Start in column one. Then indent to column ten. Then back five spaces. 
 
-p.mb-2 Here's a table with a border, a caption, colgroups, cols, thead, tfoot, & tbody: 
+p.mb-2.mt-4 Here's a table with a border, a caption, colgroups, cols, thead, tfoot, & tbody: 
 
 table.table
-  caption
+  caption.title
     | This is a table caption, made with caption
-  colgroup[span="2"]
-    col
-    col
-  colgroup
+
   thead
     tr
       th
@@ -168,11 +165,11 @@ table.table
         | Table Header 3
   tfoot
     tr
-      td
+      td.text-sm
         | Table Footer 1
-      td
+      td.text-sm
         | Table Footer 2
-      td
+      td.text-sm
         | Table Footer 3
   tbody
     tr
@@ -198,54 +195,56 @@ table.table
         | TD 3.3
 
 
-h1.title Form elements
+h1.title.mt-6 Form elements
 
 form.form
   fieldset
     legend
       | Input fields
-    p
+    p.mb-4
       label[for="input__text"]
         | Text Input
       input#input__text[type="text" placeholder="Text Input"]
-    p
+    p.mb-4
       label[for="input__password"]
         | Password
       input#input__password[type="password" placeholder="Type your Password"]
-    p
+    p.mb-4
       label[for="input__webaddress"]
         | Web Address
       input#input__webaddress[type="url" placeholder="http://yoursite.com"]
-    p
+    p.mb-4
       label[for="input__emailaddress"]
         | Email Address
       input#input__emailaddress[type="email" placeholder="name@email.com"]
-    p
+    p.mb-4
       label[for="input__phone"]
         | Phone Number
       input#input__phone[type="tel" placeholder="(999) 999-9999"]
-    p
+    p.mb-4
       label[for="input__search"]
         | Search
       input#input__search[type="search" placeholder="Enter Search Term"]
-    p
+    p.mb-4
       label[for="input__text2"]
         | Number Input
       input#input__text2[type="number" placeholder="Enter a Number"]
-    p
+    p.mb-4.error
       label.error[for="input__text3"]
         | Error
       input#input__text3.is-error[type="text" placeholder="Text Input"]
-    p
+      span.block.error the error explanation
+    p.mb-4.valid
       label.valid[for="input__text4"]
         | Valid
       input#input__text4.is-valid[type="text" placeholder="Text Input"]
+      span.block.hint a hint
 
 
   fieldset
     legend
       | Select menus
-    p
+    p.mb-4
       label[for="select"]
         | Select
       select#select
@@ -342,18 +341,13 @@ form.form
   fieldset
     legend
       | Action buttons
-    p
-      input[type="submit" value="<input type=submit>"]
-      input[type="button" value="<input type=button>"]
-      input[type="reset" value="<input type=reset>"]
-      input[type="submit" value="<input disabled>" disabled]
-    p
-      button[type="submit"]
-        | <button type=submit>
-      button[type="button"]
-        | <button type=button>
-      button[type="reset"]
-        | <button type=reset>
-      button[type="button" disabled]
-        | <button disabled>
+    p.flex
+      button.btn.btn-primary.mr-1
+        | primary
+      button.btn.btn-secundary.mr-1
+        | secundary
+      button.btn.btn-terciary.mr-1
+        | terciary
+      button.btn.btn-terciary[disabled=true]
+        | disabled
 

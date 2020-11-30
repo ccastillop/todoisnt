@@ -17,5 +17,5 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 
-import  "../css/application.css";
+import  "../css/application.scss";
 import "fontsource-lato/index.css";

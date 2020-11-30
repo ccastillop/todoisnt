@@ -1,5 +1,5 @@
 .title {
-  @apply font-bold leading-tight;
+  @apply font-bold leading-tight mb-2;
 }
 
 h1.title{
@@ -11,13 +11,16 @@ h2.title {
 }
 
 h3.title {
-  @apply text-4xl;
+  @apply text-2xl;
+}
+
+h4.title {
+  @apply text-xl;
 }
 
 h5.title {
-  @apply text-sm;
+  @apply text-lg;
 }
 
 h6.title {
-  @apply text-xs;
 }

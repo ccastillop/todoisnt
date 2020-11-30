@@ -1,0 +1,21 @@
+.btn {
+  @apply py-1 px-3 rounded;
+  &:active,
+  &.active,
+  &:hover,
+  &:focus{
+    @apply bg-opacity-75
+  }
+  &:disabled{
+    @apply text-gray-300;
+  }
+  &-primary {
+    @apply bg-gray-800 text-white;
+  }
+  &-secundary {
+    @apply bg-blue-800 text-white;
+  }
+  &-terciary {
+    @apply border bg-gray-100;
+  }
+}

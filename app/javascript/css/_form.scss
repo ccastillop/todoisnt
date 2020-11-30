@@ -22,7 +22,7 @@
   }
 
   label {
-    @apply block pb-2;
+    @apply block pb-2 font-bold;
     abbr {
     }
   }
@@ -30,20 +30,26 @@
   input[type="text"],
   input[type="number"],
   input[type="email"],
+  input[type="url"],
+  input[type="search"],
   input[type="tel"],
   input[type="date"],
   input[type="time"],
   input[type="password"],
+  input[type="color"],
+  input[type="month"],
+  input[type="week"],
+  input[type="datetime"],
+  input[type="datetime-local"],
   textarea,
   .input_like {
-    @apply border-1 border-black py-2 px-3 bg-white min-h-3;
+    @apply border border-black py-1 px-2 bg-white;
     &:disabled,
     &.disabled {
       @apply bg-gray-100;
       @apply shadow-none;
     }
     &:focus {
-      @apply border-green1 outline-none;
     }
   }
 
@@ -55,18 +61,21 @@
   input[type="radio"] {
     @apply mr-2;
   }
+  
+  input[type="search"] {
+    @apply rounded-full;
+  }
 
   select {
-    @apply bg-white border-1 border-black pl-2 pr-4 py-2 min-h-3 w-full;
+    @apply bg-white border border-black pl-2 pr-4 py-2 w-full appearance-none;
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 14 7"><g><g><path d="M0 0l7 7 7-7z"/></g></g></svg>')
       no-repeat;
     background-size: 10px;
     background-position: calc(100% - 6px) center;
     &:disabled {
-      @apply bg-white shadow-none border-gray3 text-gray4;
+      @apply bg-white shadow-none border-gray-300 text-gray-800;
     }
     &:focus {
-      @apply border-green1 outline-none;
     }
   }
 
@@ -75,16 +84,16 @@
     input,
     select,
     textarea {
-      @apply border border-red1;
+      @apply border border-red-600;
     }
     .error,
     .form-control-feedback {
-      @apply text-red-100 text-sm italic;
+      @apply text-red-600 text-sm italic;
     }
   }
 
   .hint {
-    @apply text-gray-800 text-sm text-right;
+    @apply text-gray-800 text-sm;
   }
 
   input.js-input-field[type="file"] {

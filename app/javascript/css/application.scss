@@ -3,5 +3,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import "_typos";
-@import "_forms";
+@import "./typos";
+@import "./form";
+@import "./table";
+@import "./button";

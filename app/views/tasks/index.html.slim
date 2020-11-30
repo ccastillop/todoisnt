@@ -2,8 +2,14 @@ h1
   | Todos
 
 ul
-  - @tasks.each do |task|
-    li
+  - @tasks.not_completed.each do |task|
+    li.border-b.border-gray-600.py-2
       = render task
-  li
+  li.py-2
     = render "form", task: Task.new
+
+
+ul
+  - @tasks.completed.each do |task|
+    li.border-b.border-gray-600.py-2
+      = render task

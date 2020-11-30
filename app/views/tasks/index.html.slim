@@ -3,10 +3,7 @@ h1
 
 ul
   - @tasks.each do |task|
-    li.flex
-      = form_with(model: task) do |f|
-        label
-          = f.check_box :completed, class: "mr-2 js-submit-on-click"
-          = task.name
+    li
+      = render task
   li
     = render "form", task: Task.new

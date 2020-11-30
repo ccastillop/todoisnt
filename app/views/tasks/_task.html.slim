@@ -1,0 +1,5 @@
+.flex id=dom_id(task)
+  = form_with(model: task) do |f|
+    label
+      = f.check_box :completed, class: "mr-2 js-submit-on-click"
+      = task.name

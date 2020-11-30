@@ -43,7 +43,7 @@
   input[type="datetime-local"],
   textarea,
   .input_like {
-    @apply border border-black py-1 px-2 bg-white;
+    @apply border border-black py-1 px-2 bg-white rounded;
     &:disabled,
     &.disabled {
       @apply bg-gray-100;

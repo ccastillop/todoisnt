@@ -19,3 +19,5 @@ require("channels")
 
 import  "../css/application.scss";
 import "fontsource-lato/index.css";
+
+import '../lib/submit_on_click_or_input.js'

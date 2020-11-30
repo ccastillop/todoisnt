@@ -1,4 +1,4 @@
-= form_with(model: task, local: true) do |form|
+= form_with(model: task, local: true, class: "form") do |form|
   - if task.errors.any?
     #error_explanation
       h2
@@ -9,13 +9,6 @@
           li
             = message
   .field
-    = form.label :project_id
-    = form.text_field :project_id
-  .field
-    = form.label :name
-    = form.text_field :name
-  .field
-    = form.label :completed
-    = form.check_box :completed
-  .actions
-    = form.submit
+    = form.text_field :name, class: "w-full", placeholder: "Add a task"
+  .actions.mt-2
+    = form.button nil, class: "btn btn-primary", data: { disable_with: "Submitting..." }

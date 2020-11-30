@@ -10,7 +10,8 @@ html
   body
     header.container.mx-auto.mt-4
       .flex
-        . = image_tag "logo.svg"
+        = link_to root_path do 
+          = image_tag "logo.svg"
 
     section.container.mx-auto.mt-4.flex.max-w-lg
       sidebar.mr-8.w-1/3

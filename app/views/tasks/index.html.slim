@@ -1,10 +1,12 @@
-p#notice
-  = notice
 h1
   | Todos
 
-- @tasks.each do |task|
-    = task.name
-    = task.completed
-
-= link_to 'Add', new_task_path
+ul
+  - @tasks.each do |task|
+    li.flex
+      = form_with(model: task) do |f|
+        label
+          = f.check_box :completed, class: "mr-2 js-submit-on-click"
+          = task.name
+  li
+    = render "form", task: Task.new

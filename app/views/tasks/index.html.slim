@@ -3,13 +3,15 @@ h1
 
 ul
   - @tasks.not_completed.each do |task|
-    li.border-b.border-gray-600.py-2
+    li.border-b.border-gray-600.py-2 id=dom_id(task)
       = render task
   li.py-2
-    = render "form", task: Task.new
+    . id=dom_id(Task.new)
+      = link_to new_task_path, remote: true, class: "flex" do
+        = image_tag "plus.svg", class: "mr-2"
+        | Add
 
-
-ul
+ul.mt-2
   - @tasks.completed.each do |task|
-    li.border-b.border-gray-600.py-2
+    li.border-b.border-gray-600.py-2 id=dom_id(task)
       = render task

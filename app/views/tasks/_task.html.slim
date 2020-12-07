@@ -1,4 +1,8 @@
-.flex id=dom_id(task)
+. id=dom_id(task)
   = form_with(model: task) do |f|
-    = f.check_box :completed, class: "mr-2 js-submit-on-click"
-    = task.name
+    .flex.align-center
+      .= f.check_box :completed, class: "mr-2 js-submit-on-click"
+      .= link_to edit_task_path(task),
+        remote: true,
+        class: "block flex-grow" do 
+        = task.name

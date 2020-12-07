@@ -10,5 +10,15 @@
             = message
   .field
     = form.text_field :name, class: "w-full", placeholder: "Add a task"
-  .actions.mt-2
-    = form.button nil, class: "btn btn-primary", data: { disable_with: "Submitting..." }
+  .actions.mt-2.flex
+    .= form.button nil,
+      class: "btn btn-primary block",
+      data: { disable_with: "Submitting..." }
+    .= link_to "Cancel", tasks_path,
+      class: "btn btn-secondary block",
+      data: { disable_with: "Canceling..." }
+    .flex-grow
+    .= link_to task, method: :delete,
+      class: "mr-auto block" ,
+      remote: true do
+      = image_tag "delete.svg"

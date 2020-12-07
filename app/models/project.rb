@@ -4,5 +4,4 @@ class Project < ApplicationRecord
   def to_s
     name
   end
-  
 end

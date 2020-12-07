@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :tasks
   resources :projects do
-    resources :tasks
+    resources :tasks, shallow: true
   end
   get "/pages/:page" => "static_pages#show"
   root "tasks#index"

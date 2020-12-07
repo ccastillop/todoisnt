@@ -7,7 +7,7 @@ ul
       = render task
   li.py-2.mt-4
     . id=dom_id(Task.new)
-      = link_to new_task_path, remote: true, class: "flex" do
+      = link_to new_project_task_path(@project), remote: true, class: "flex" do
         = image_tag "plus.svg", class: "mr-2"
         | Add
 

@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is *another* todo application
 
-Things you may want to cover:
-
-* Ruby version
+But this is done using pure old ruby on rails HTML in the wire code and it is compared, as a way of practicing, to a pure ReactJS front end
 
 * System dependencies
 
-* Configuration
+See Gemfile and Yarn.lock
 
-* Database creation
+* Database creation and Initialization
 
-* Database initialization
+Run in console a db:setup
 
 * How to run the test suite
 
+TBD
+
 * Services (job queues, cache servers, search engines, etc.)
+
+None for now
 
 * Deployment instructions
 
-* ...
+Using DigitalOcean simple deploy procedure, just for fun: https://todoisnt-2ql5k.ondigitalocean.app/
+
+Just a simple Push to the master is enough to deploy :)
+

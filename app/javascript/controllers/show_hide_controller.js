@@ -7,15 +7,14 @@ export default class extends Controller {
     name: String 
   }
 
-  static targets = [ "element", "message" ]
+  static targets = [ "element", "message", "chevron"]
 
   connect() {
     this.persistentName = `show-hide-${this.nameValue}`
 
-    if ( this.isOpen() )
-      this.setIsOpen(false)
-    else
-      this.setIsOpen(true)
+    this.isOpen()
+      ? this.setIsOpen(false)
+      : this.setIsOpen(true)
 
     this.toggle()
   }
@@ -29,21 +28,26 @@ export default class extends Controller {
   }
 
   toggle() {
-    if ( this.isOpen() ) {
-      this.setIsOpen(false)
-      this.messageTarget.innerText = this.messagesValue[0]
-    }
-    else {
-      this.setIsOpen(true)
-      this.messageTarget.innerText = this.messagesValue[1]
-    }
+    this.setIsOpen(!this.isOpen())
     
     this.elementTargets.map((element) => {
-      if ( this.isOpen() )
-        element.classList.remove("hidden")
-      else
-        element.classList.add("hidden")
+      this.isOpen() 
+        ? element.classList.remove("hidden")
+        : element.classList.add("hidden")
     })
+
+    if (this.hasMessagesValue && this.hasMessageTarget) {
+      this.isOpen()
+        ? this.messageTarget.innerText = this.messagesValue[1]
+        : this.messageTarget.innerText = this.messagesValue[0]
+    }
+
+    this.chevronTargets.map((element) => {
+      this.isOpen() 
+      ? element.classList.add("rotate-90")
+      : element.classList.remove("rotate-90")
+    })
+
   }
 
 }

@@ -1,5 +1,5 @@
 h1
-  | #{@project} todos
+  | #{@project || "Inbox"} tasks (#{@tasks.not_completed.count})
 
 ul
   - @tasks.not_completed.each do |task|
@@ -12,7 +12,7 @@ ul
         | Add
 
 . (data-controller="show-hide"
-    data={ "show-hide": { "messages-value": ["Show completed", "Hide completed"],
+    data={ "show-hide": { "messages-value": ["Show completed (#{@tasks.completed.count})", "Hide completed (#{@tasks.completed.count})"],
             "name-value": "completed-tasks" } })
   .flex.my-4.text-right.cursor-pointer data={ action: "click->show-hide#toggle" }
     .transition-transform.transform data-show-hide-target="chevron"

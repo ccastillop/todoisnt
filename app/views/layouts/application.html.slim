@@ -5,18 +5,22 @@ html
       | Todoisnt
     = csrf_meta_tags
     = csp_meta_tag
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = yield(:head)
   body
     header.container.mx-auto.mt-4
       .flex.items-center
         = link_to root_path do 
           = image_tag "logo.svg"
 
-        = link_to "Rails version", root_path, class: "ml-8 #{current_page?(controller: :tasks) ? "underline" : ""}"
-        = link_to "React version", page_path("react"), class: "ml-8 #{params[:page]=='react' ? "underline" : ""}"
+        = link_to "Rails version", root_path,
+          class: "ml-8 #{params[:controller] == "tasks" ? "underline" : ""}"
+        = link_to "React version", page_path("react"),
+          data: { turbolinks: false },
+          class: "ml-8 #{params[:page]=='react' ? "underline" : ""}"
 
-    section.container.mx-auto.mt-4.flex.max-w-lg
+    section.container.mx-auto.mt-4.flex.lg:w-1/2
       - if content_for?(:content)
         = yield(:content)
       - else

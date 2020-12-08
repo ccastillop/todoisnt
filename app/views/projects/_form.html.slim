@@ -14,7 +14,7 @@
     .= form.button nil,
       class: "btn btn-primary block",
       data: { disable_with: "Submitting..." }
-    .= link_to "Cancel", project_tasks_path(Project.first),
+    .= link_to "Cancel", tasks_path,
       class: "btn btn-secondary block",
       data: { disable_with: "Canceling..." }
     .flex-grow

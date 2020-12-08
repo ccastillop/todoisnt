@@ -1,4 +1,5 @@
-= form_with(model: [@project, task], class: "form") do |form|
+= form_with(model: task, class: "form") do |form|
+  = form.hidden_field :project_id 
   - if task.errors.any?
     #error_explanation
       h2
@@ -14,9 +15,14 @@
     .= form.button nil,
       class: "btn btn-primary block",
       data: { disable_with: "Submitting..." }
-    .= link_to "Cancel", project_tasks_path(task.project),
-      class: "btn btn-secondary block",
-      data: { disable_with: "Canceling..." }
+    - if task.new_record?
+      .= link_to "Cancel", tasks_path(project_id: params[:project_id]),
+        class: "btn btn-secondary block",
+        data: { disable_with: "Canceling..." }      
+    - else
+      .= link_to "Cancel", task, remote: true,
+        class: "btn btn-secondary block",
+        data: { disable_with: "Canceling..." }
     .flex-grow
     - unless task.new_record?
       .= link_to task, method: :delete,

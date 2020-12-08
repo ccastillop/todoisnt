@@ -1,1 +1,6 @@
-document.getElementById('<%= dom_id(@task) %>').innerHTML = "<%= j render(@task) %>"
+var el = document.getElementById('<%= dom_id(@task) %>')
+<% if @task.persisted? %>
+el.innerHTML = "<%= j render(@task) %>"
+<% else %>
+el.parentNode.removeChild(el)
+<% end %>

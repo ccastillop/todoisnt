@@ -1,4 +1,4 @@
-= form_with(model: project, local: true) do |form|
+= form_with(model: project, class: "form") do |form|
   - if project.errors.any?
     #error_explanation
       h2
@@ -9,7 +9,17 @@
           li
             = message
   .field
-    = form.label :name
-    = form.text_field :name
-  .actions
-    = form.submit
+    = form.text_field :name, class: "w-full", placeholder: "Add a project"
+  .actions.mt-2.flex
+    .= form.button nil,
+      class: "btn btn-primary block",
+      data: { disable_with: "Submitting..." }
+    .= link_to "Cancel", project_tasks_path(Project.first),
+      class: "btn btn-secondary block",
+      data: { disable_with: "Canceling..." }
+    .flex-grow
+    - unless project.new_record?
+      .= link_to project, method: :delete,
+        class: "mr-auto block" ,
+        remote: true do
+        = image_tag "delete.svg"

@@ -2,31 +2,44 @@ import { Controller } from "stimulus"
 import Cookies from "js-cookie"
 
 export default class extends Controller {
-  static values = { messages: Array }
+  static values = { 
+    messages: Array,
+    name: String 
+  }
+
   static targets = [ "element", "message" ]
 
   connect() {
-    if ( Cookies.get("show-hide") === "yes" ) {
-      Cookies.set("show-hide", "no")
-      this.toggle()
-    } else {
-      Cookies.set("show-hide", "yes")
-      this.toggle()
-    }
+    this.persistentName = `show-hide-${this.nameValue}`
+
+    if ( this.isOpen() )
+      this.setIsOpen(false)
+    else
+      this.setIsOpen(true)
+
+    this.toggle()
+  }
+  
+  isOpen() {
+    return Cookies.get(this.persistentName) === "yes"
+  }
+
+  setIsOpen(bool) {
+    Cookies.set(this.persistentName, bool ? "yes" : "no")
   }
 
   toggle() {
-    if ( Cookies.get("show-hide") === "yes" ) {
-      Cookies.set("show-hide", "no")
+    if ( this.isOpen() ) {
+      this.setIsOpen(false)
       this.messageTarget.innerText = this.messagesValue[0]
     }
     else {
-      Cookies.set("show-hide", "yes")
+      this.setIsOpen(true)
       this.messageTarget.innerText = this.messagesValue[1]
     }
     
     this.elementTargets.map((element) => {
-      if ( Cookies.get("show-hide") === "yes" )
+      if ( this.isOpen() )
         element.classList.remove("hidden")
       else
         element.classList.add("hidden")

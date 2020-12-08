@@ -80,6 +80,8 @@ test:
 #
 production:
   <<: *default
-  database: todoisnt_production
-  username: todoisnt
-  password: <%= ENV['TODOISNT_DATABASE_PASSWORD'] %>
+  host: <%= Rails.application.credentials.dig(:database, :host) %>
+  port: <%= Rails.application.credentials.dig(:database, :port) %>
+  database: db-todoisnt
+  username: db-todoisnt
+  password: <%= Rails.application.credentials.dig(:database, :password) %>

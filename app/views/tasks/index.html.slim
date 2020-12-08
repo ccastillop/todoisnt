@@ -1,5 +1,5 @@
 h1
-  | Todos
+  | #{@project} todos
 
 ul
   - @tasks.not_completed.each do |task|
@@ -12,7 +12,8 @@ ul
         | Add
 
 . (data-controller="show-hide"
-    data={ "show-hide": { "messages-value": ["Show completed", "Hide completed"]  } })
+    data={ "show-hide": { "messages-value": ["Show completed", "Hide completed"],
+            "name-value": "completed-tasks" } })
   p.my-4.text-right.cursor-pointer data={ action: "click->show-hide#toggle", "show-hide-target": "message"}
   ul.mt-2 data-show-hide-target="element"
     - @tasks.completed.each do |task|

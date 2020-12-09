@@ -13,10 +13,20 @@ export const Projects = ({projects, setProject, selectedProject}) => {
 
   return (
     <section className="w-1/3">
-      <IconButton icon={inboxIcon} text={"Inbox"} />
-      <div onClick={handleOpen}>
-        <IconButton icon={chevronIcon} text={`Projects (${projects.length})`} rotate={isOpen} />
-      </div>
+
+      <IconButton
+        icon={inboxIcon}
+        text={"Inbox"}
+        selected={!selectedProject}
+        handleClick={() => setProject(null)}
+      />
+
+      <IconButton
+        icon={chevronIcon}
+        text={`Projects (${projects.length})`} rotate={isOpen}
+        handleClick={handleOpen}
+      />
+
       {isOpen && (
         <ul>
           {projects.map((project) => (
@@ -29,7 +39,9 @@ export const Projects = ({projects, setProject, selectedProject}) => {
           ))}
         </ul>
       )}
+
       <IconButton icon={plusIcon} text={"Create project"} />
+
     </section>
   );
 };

@@ -15,6 +15,7 @@ export const Projects = ({projects, setProject, selectedProject, setNewProject})
   }
   
   const handleNewFormOpen = () => {
+    if (!isNewOpen) setForm({})
     setIsNewOpen(!isNewOpen)
   }
 

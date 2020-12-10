@@ -10,6 +10,8 @@ const App = () => {
   const [projects, setProjects] = useState([])
   const [selectedProject, setSelectedProject] = useState()
   const [tasks, setTasks] = useState([])
+  const [showNewTaskForm, setShowNewTaskForm] = useState(false)
+  const [form, setForm] = useState({ name: "" })
   const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
   const getTasks = () => {
@@ -49,6 +51,29 @@ const App = () => {
     })
   }
 
+  const setNewTask = (name) => {
+    const task_url = `/tasks.json`
+    const payload = {
+      task: {
+        name: name, 
+        project_id: selectedProject ? selectedProject.id : null
+      }
+    }
+    fetch(task_url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrf
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then((response) => {
+      console.log(response)
+      getTasks()
+    })
+  }
+
   const handleCompletedOpen = () => {
     setIsCompletedOpen(!isCompletedOpen)
   }
@@ -58,6 +83,11 @@ const App = () => {
     console.log(project)
   }
 
+  const handleShowAddNewTaskForm = () => {
+    if (!showNewTaskForm) setForm({})
+    setShowNewTaskForm(!showNewTaskForm)
+  }
+  
   const toggleCompleted = (task) => {
     const task_url = `/tasks/${task.id}.json`
     fetch(task_url, {
@@ -78,6 +108,19 @@ const App = () => {
 
   useEffect(getProjects,[])
 
+  const handleInputChange = (event) => {
+    const target = event.target
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    const name = target.name
+    setForm( prevForm => Object.assign({}, prevForm, {[name]:value} ))
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    setShowNewTaskForm(false)
+    setNewTask(form.name)
+  }
+
   return (
     <div className="flex">
       <Projects projects={projects}
@@ -93,7 +136,46 @@ const App = () => {
           tasks={tasks.filter(task => !task.completed)}
           toggleCompleted={toggleCompleted}
         />
-        <IconButton icon={plusIcon} text={"Add"} />
+        { showNewTaskForm 
+        ? 
+          (
+            <form className="form my-4" onSubmit={handleSubmit}>
+              <div className="field">
+                <input
+                  className="w-full"
+                  placeholder="Add a Task"
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="actions mt-2 flex">
+                <div>
+                  <button
+                    name="button"
+                    type="submit"
+                    className="btn btn-primary block"
+                  >
+                    Add Task
+                  </button>
+                </div>
+                <div>
+                  <div
+                    className="btn btn-secondary block cursor-pointer"
+                    onClick={handleShowAddNewTaskForm} >
+                    Cancel
+                  </div>
+                </div>
+              </div>
+            </form>
+          )
+        : 
+          (
+            <IconButton icon={plusIcon} text={"Add"} handleClick={handleShowAddNewTaskForm} />
+          )
+        }
+        
         <IconButton
           icon={chevronIcon}
           text={ isCompletedOpen ? "Hide completed" : "Show completed"}

@@ -30,18 +30,38 @@ const App = () => {
     })
   }
 
+  const setNewProject = (name) => {
+    const task_url = `/projects.json`
+    fetch(task_url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrf
+      },
+      body: JSON.stringify({
+        project: {name: name}
+      })
+    })
+    .then(res => res.json())
+    .then((response) => {
+      console.log(response)
+      getProjects()
+    })
+  }
+
   const handleCompletedOpen = () => {
     setIsCompletedOpen(!isCompletedOpen)
   }
 
   const handleSetProject = (project) => {
     setSelectedProject(project)
+    console.log(project)
   }
 
   const toggleCompleted = (task) => {
     const task_url = `/tasks/${task.id}.json`
     fetch(task_url, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': csrf
@@ -62,10 +82,13 @@ const App = () => {
     <div className="flex">
       <Projects projects={projects}
         setProject={(project)=>handleSetProject(project)}
-        selectedProject={selectedProject} />
-
+        selectedProject={selectedProject}
+        setNewProject={setNewProject}
+      />
       <div className="w-2/3 ml-8">
-        <h1 className="font-bold mb-2">Tasks</h1>
+        <h1 className="font-bold mb-2">
+          {`${selectedProject ? selectedProject.name : ""} Tasks`}
+        </h1>
         <Tasks 
           tasks={tasks.filter(task => !task.completed)}
           toggleCompleted={toggleCompleted}

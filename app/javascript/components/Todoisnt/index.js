@@ -9,26 +9,26 @@ const App = () => {
   const [isCompletedOpen, setIsCompletedOpen] = useState(false)
   const [projects, setProjects] = useState([])
   const [selectedProject, setSelectedProject] = useState()
-  const projects_url = "/projects.json"
   const [tasks, setTasks] = useState([])
+  const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
-
-  useEffect(() => {
+  const getTasks = () => {
     const task_url = selectedProject ? `/tasks.json?project_id=${selectedProject.id}` : "/tasks.json"
     fetch(task_url)
     .then(res => res.json())
     .then((results) => {
       setTasks(results)
     })
-  },[selectedProject])
-
-  useEffect(() => {
+  }
+  
+  const getProjects = () => {
+    const projects_url = "/projects.json"
     fetch(projects_url)
     .then(res => res.json())
     .then((results) => {
       setProjects(results)
     })
-  },[])
+  }
 
   const handleCompletedOpen = () => {
     setIsCompletedOpen(!isCompletedOpen)
@@ -37,7 +37,27 @@ const App = () => {
   const handleSetProject = (project) => {
     setSelectedProject(project)
   }
+
+  const toggleCompleted = (task) => {
+    const task_url = `/tasks/${task.id}.json`
+    fetch(task_url, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrf
+      },
+      body: JSON.stringify({
+        task: {completed: !task.completed}
+      })
+    })
+    .then(res => res.json())
+    .then(getTasks)
+  }
   
+  useEffect(getTasks,[selectedProject])
+
+  useEffect(getProjects,[])
+
   return (
     <div className="flex">
       <Projects projects={projects}
@@ -46,7 +66,10 @@ const App = () => {
 
       <div className="w-2/3 ml-8">
         <h1 className="font-bold mb-2">Tasks</h1>
-        <Tasks tasks={tasks.filter(task => !task.completed)} />
+        <Tasks 
+          tasks={tasks.filter(task => !task.completed)}
+          toggleCompleted={toggleCompleted}
+        />
         <IconButton icon={plusIcon} text={"Add"} />
         <IconButton
           icon={chevronIcon}
@@ -55,7 +78,10 @@ const App = () => {
           handleClick={handleCompletedOpen}
         />
         {isCompletedOpen && (
-          <Tasks tasks={tasks.filter(task => task.completed)} />
+          <Tasks
+            tasks={tasks.filter(task => task.completed)}
+            toggleCompleted={toggleCompleted}
+          />
         )}
       </div>
     </div>

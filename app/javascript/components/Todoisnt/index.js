@@ -12,7 +12,7 @@ const App = () => {
   const [tasks, setTasks] = useState([])
   const [showNewTaskForm, setShowNewTaskForm] = useState(false)
   const [form, setForm] = useState({ name: "" })
-  const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+  const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
   const getTasks = () => {
     const task_url = selectedProject ? `/tasks.json?project_id=${selectedProject.id}` : "/tasks.json"

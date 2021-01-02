@@ -9,12 +9,14 @@
           li
             = message
   .field
-    = form.text_field :name, class: "w-full", placeholder: "Add a project"
+    = form.text_field :name, class: "w-full", placeholder: "Project name"
+  .field
+    = form.select :color, Project::COLORS, include_blank: true
   .actions.mt-2.flex
     .= form.button nil,
       class: "btn btn-primary block",
       data: { disable_with: "Submitting..." }
-    .= link_to "Cancel", tasks_path,
+    .= link_to "Cancel", tasks_path(project_id: project.id),
       class: "btn btn-secondary block",
       data: { disable_with: "Canceling..." }
     .flex-grow

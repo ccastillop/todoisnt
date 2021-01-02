@@ -1,0 +1,7 @@
+document
+  .getElementById('project_list')
+  .innerHTML = "<%= j render(Project.all) %>";
+
+document
+  .getElementById('<%= dom_id(Project.new) %>')
+  .innerHTML = "<%= j render('tasks/new')%>";

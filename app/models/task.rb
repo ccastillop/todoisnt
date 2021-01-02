@@ -4,6 +4,7 @@ class Task < ApplicationRecord
 
   scope :completed, -> { where(completed: true) }
   scope :not_completed, -> { where(completed: false) }
+  scope :inbox, -> { where(project_id: nil)}
 
   def to_s
     name

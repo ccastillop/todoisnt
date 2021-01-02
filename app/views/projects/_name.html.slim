@@ -1,0 +1,5 @@
+- if project.present?
+  = link_to edit_project_path(project), remote: true do 
+    | #{project} (#{project.tasks.not_completed.count})
+- else
+  | Inbox (#{Task.not_completed.count})

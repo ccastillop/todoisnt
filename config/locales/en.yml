@@ -31,8 +31,3 @@
 
 en:
   hello: "Hello world"
-
-  helpers:
-    submit:
-      create: "Add %{model}"
-      update: "Update %{model}"

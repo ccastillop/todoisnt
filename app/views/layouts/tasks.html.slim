@@ -13,20 +13,12 @@
         . Projects
     
       ul#project_list.mt-2 data-show-hide-target="element"
-        - Project.all.each do |project|
-          li.flex.items-center.my-1.py-1 class="#{ @project == project ? "bg-gray-200" : "" }"
-            .rounded-full.w-3.h-3.mx-1.bg-green-500.border-green-500.border-2
-            = link_to project, tasks_path(project_id: project.id), class:"block ml-3 flex-grow"
+        = render Project.all
     
     .mt-2 id= dom_id(Project.new)
-      = link_to new_project_path,
-        remote: true,
-        class:"flex" do
-        .mr-2
-          = image_tag "plus.svg"
-        . Create project
+      = render "tasks/new"
       
-  section.w-2/3
+  section#tasks_list.w-2/3
     = yield  
 
 = render template: "layouts/application"

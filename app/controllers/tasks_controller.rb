@@ -37,6 +37,7 @@ class TasksController < ApplicationController
       if @task.save
         format.html { redirect_to tasks_path(project_id: @task.project_id), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
+        format.js { redirect_to tasks_path(project_id: @task.project_id), status: :see_other }
       else
         format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -52,7 +53,7 @@ class TasksController < ApplicationController
       if @task.update(task_params)
         format.html { redirect_to tasks_path(project_id: @task.project_id), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
-
+        format.js { redirect_to tasks_path(project_id: @task.project_id), status: :see_other }
       else
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -66,10 +67,10 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_path(project_id: params[:params_id]),
+      format.html { redirect_to tasks_path(project_id: @task.project_id),
         notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
-      format.js { render :show }
+      format.js { redirect_to tasks_path(project_id: @task.project_id), status: :see_other }
     end
   end
 

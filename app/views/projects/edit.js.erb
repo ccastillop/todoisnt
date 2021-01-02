@@ -1,1 +1,3 @@
-document.getElementById('<%= dom_id(@project) %>').innerHTML = "<%= j render("form", project: @project) %>"
+document
+  .getElementById('<%= dom_id(@project) %>')
+  .innerHTML = "<%= j render("form", project: @project) %>"

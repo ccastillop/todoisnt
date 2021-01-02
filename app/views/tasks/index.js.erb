@@ -1,0 +1,7 @@
+document
+  .getElementById('tasks_list')
+  .innerHTML = "<%= j render('index') %>";
+
+document
+  .getElementById('project_list')
+  .innerHTML = "<%= j render(Project.all) %>";
